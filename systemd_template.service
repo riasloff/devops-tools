@@ -1,0 +1,21 @@
+[Install]
+WantedBy=multi-user.target
+
+[Unit]
+Description=example starter
+Requires=network-online.target example.service
+After=network-online.target example.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+WorkingDirectory=/opt/example
+ExecStart=example compose up -d
+ExecStop=example compose down
+Restart=on-failure
+RestartSec=60
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=example
+
